@@ -19,6 +19,9 @@ except:
     time.sleep(0.1)
     sys.exit(-1)
 
+config_dir = os.environ["CONFIG_DIR"]
+output_filename = "appletv.json"
+output_filepath = os.path.join(config_dir, output_filename)
 
 skip_types = ["sponsor", "selfpromo", "intro", "outro"]
 proj_name = "SBRemote"
@@ -154,11 +157,11 @@ def print_state(txt):
             print (ln)
 
 async def connect_atv():
-    while not os.path.exists("appletv.json"):
+    while not os.path.exists(output_filepath):
         from pair_and_save import scan
         await scan(loop)
     
-    data = json.load(open('appletv.json'))
+    data = json.load(output_filepath)
 
     id = data["identifier"]
     creds = data["credentials"]

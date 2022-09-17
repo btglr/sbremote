@@ -12,7 +12,9 @@ from yaspin import yaspin
 pair = pyatv.pair
 Protocol = pyatv.const.Protocol
 
+config_dir = os.environ["CONFIG_DIR"]
 output_filename = "appletv.json"
+output_filepath = os.path.join(config_dir, output_filename)
 
 async def scan(loop):
     with yaspin(text="Scanning") as sp:
@@ -52,8 +54,8 @@ async def scan(loop):
     id = atv.identifier
     nj = {"credentials": creds, "identifier": id, "name": name}
 
-    json.dump(nj, open(output_filename, "w"))
-    print (f"Saved credentials to {output_filename}")
+    json.dump(nj, open(output_filepath, "w"))
+    print (f"Saved credentials to {output_filepath}")
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
