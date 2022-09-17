@@ -161,7 +161,7 @@ async def connect_atv():
         from pair_and_save import scan
         await scan(loop)
     
-    data = json.load(output_filepath)
+    data = json.load(open(output_filepath))
 
     id = data["identifier"]
     creds = data["credentials"]
